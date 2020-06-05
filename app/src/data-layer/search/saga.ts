@@ -2,7 +2,7 @@ import http from 'axios';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import * as ActionTypes from 'data-layer/search/constants';
 
-const apiSearchDetails = async ({ value }: { value: string }) => await http.get(`https://www.metaweather.com/api/location/${value}/`);
+const apiSearchDetails = async ({ value }: { value: string }) => await http.get(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${value}`);
 function* searchDetails(action: any) {
   try {
     const { data } = yield call(apiSearchDetails, action.data);
@@ -12,7 +12,7 @@ function* searchDetails(action: any) {
   }
 }
 
-const apiSearchByQuery = async ({ value }: { value: string }) => await http.get(`https://www.metaweather.com/api/location/search/?query=${value}`);
+const apiSearchByQuery = async ({ value }: { value: string }) => await http.get(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${value}`);
 function* search(action: any) {
   try {
     const res = yield call(apiSearchByQuery, action.data);
