@@ -1,13 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
 import './index.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import App from './containers/app/App';
-import * as serviceWorker from './serviceWorker';
+import App from 'containers/app/App';
+import * as serviceWorker from 'serviceWorker';
+import configureStore, { sagaMiddleware } from 'data-layer/configureStore';
+import sagas from 'data-layer/sagas';
+
+const store = configureStore({});
+
+sagaMiddleware.run(sagas);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
